@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <name>HelloWorld</name>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="org.pgsqlite.SQLitePlugin" />
+    </feature>
+    <name>SingJA</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+       Sing like there is no tomorrow
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+       O-cowan
     </author>
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.5.0" />

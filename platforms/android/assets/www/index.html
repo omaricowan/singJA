@@ -1,16 +1,13 @@
 <!doctype html>
 <html>
-
 	<head>
-
 		<title>unquote</title>
-
 		<meta name="viewport" 
 		content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-		<script
-		  src="components/platform/platform.js">
-		</script>
+        <script src="components/platform/platform.js"></script>
+        <script	src="js/index.js"></script>
+        <script	src="js/db.js"></script>	
+        <script src="cordova.js"></script>	 
 		<link rel="import"
 			href="components/core-ajax/core-ajax.html">
 		<link rel="import"
@@ -30,34 +27,30 @@
 		<link rel="import" 
 			href="components/core-field/core-field.html">		
 		<link rel="stylesheet" 
-			href="css/index.css">
+			href="css/index.css">        
+        <link rel="import" href="elements/tab_element.html">
 	</head>
-
 	<body theme="core-light-theme" fullbleed vertical layout unresolved>
-		
-		<core-toolbar>			
-		  <span flex>SingJa</span>
-		  <paper-icon-button id="morebutton"
-			icon="more-vert"></paper-icon-button>
-		</core-toolbar>
-		
-		<core-field>
-			<div class="icon"></div>
-			<input placeholder="Search" flex>
-			<paper-icon-button icon="search"></paper-icon-button>
-		</core-field> 
-		
-		<polymer-element name="say-hello" attributes="name">
-		  <template>
-			Hello, <b>{{name}}</b>!
-		  </template>
-		  <script>
-			Polymer('say-hello', {
-			  ready: function() {
-				this.name = 'Stranger'
-			  }
-			});
-			</script>
-		</polymer-element>
+        <my-element></my-element> 
+        <section id="songs">
+            <div id="link1">
+                <core-selector selected="1">
+                <paper-item tabindex="0">Item 1</paper-item>
+                <paper-item tabindex="0" class="core-selected" active="">Item 2</paper-item>
+                <paper-item tabindex="0">Item 3</paper-item>
+                </core-selector>
+            </div>        
+        </section>         
+      <core-pages selected="{{ selected }}" notap id="core_pages">
+        <div id="link1">
+            <core-selector selected="1">
+            <paper-item tabindex="0">Item 1</paper-item>
+            <paper-item tabindex="0" class="core-selected" active="">Item 2</paper-item>
+            <paper-item tabindex="0">Item 3</paper-item>
+            </core-selector>
+        </div>
+        <div id="link2">Page 2</div>
+        <div id="link3">Page 3</div>
+      </core-pages> 
 	</body>
 </html>

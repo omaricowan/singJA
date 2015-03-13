@@ -1,16 +1,15 @@
 <!doctype html>
 <html>
-
 	<head>
-
 		<title>unquote</title>
-
 		<meta name="viewport" 
 		content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-		<script
-		  src="components/platform/platform.js">
-		</script>
+        <script src="components/platform/platform.js"></script>
+        <script	src="js/index.js"></script>
+        <script	src="js/db.js"></script>	
+        <script src="cordova.js"></script>	
+        <script src="components/webcomponentsjs/webcomponents.min.js"></script>
+        
 		<link rel="import"
 			href="components/core-ajax/core-ajax.html">
 		<link rel="import"
@@ -28,36 +27,80 @@
 			<link rel="import"
 			href="components/paper-item/paper-item.html">	 
 		<link rel="import" 
-			href="components/core-field/core-field.html">		
+			href="components/core-field/core-field.html">
+        
+        <link rel="import" href="components/core-animated-pages/core-animated-pages.html">
+        <link rel="import" href="components/core-animated-pages/transitions/slide-from-right.html">
 		<link rel="stylesheet" 
-			href="css/index.css">
+			href="css/index.css">  
+        
+        
+        <link rel="import" href="elements/tab_element.html">
 	</head>
-
 	<body theme="core-light-theme" fullbleed vertical layout unresolved>
-		
-		<core-toolbar>			
-		  <span flex>SingJa</span>
-		  <paper-icon-button id="morebutton"
-			icon="more-vert"></paper-icon-button>
-		</core-toolbar>
-		
-		<core-field>
-			<div class="icon"></div>
-			<input placeholder="Search" flex>
-			<paper-icon-button icon="search"></paper-icon-button>
-		</core-field> 
-		
-		<polymer-element name="say-hello" attributes="name">
-		  <template>
-			Hello, <b>{{name}}</b>!
-		  </template>
-		  <script>
-			Polymer('say-hello', {
-			  ready: function() {
-				this.name = 'Stranger'
-			  }
-			});
-			</script>
-		</polymer-element>
+        <template is="auto-binding" id="t">
+            <!-- Route controller. -->
+            <flatiron-director route="{{route}}" autoHash></flatiron-director>
+            
+            
+             <!-- Keyboard nav controller. -->
+           <core-a11y-keys id="keys" target="{{parentElement}}"
+                          keys="up down left right space space+shift"
+                          on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
+
+           <!-- Dynamic content controller -->
+           <core-ajax id="ajax" url="{{selectedPage.page.url}}" handleAs="document"
+                     on-core-response="{{onResponse}}"></core-ajax>
+            
+            <core-toolbar class="medium-tall">
+
+                <paper-icon-button icon="menu" role="button" tabindex="0" aria-label="menu"></paper-icon-button>
+                <div flex="">SingJa</div>
+                <paper-icon-button icon="search" role="button" tabindex="0" aria-label="search"></paper-icon-button>
+                <paper-icon-button icon="more-vert" role="button" tabindex="0" aria-label="more-vert"></paper-icon-button>
+
+                <div class="bottom fit" horizontal="" layout="">
+
+                    <paper-tabs valueattr="hash" selected="{{route}}" on-core-select="{{menuItemSelected}}" flex="" 
+                              style="max-width: 600px;" role="tablist" horizontal="" center="" layout="">
+
+                    <paper-tab role="tab" inline="" flex="" center-center="" horizontal="" layout="" class=""> <a href="#one">All songs</a></paper-tab>
+                    <paper-tab role="tab" inline="" flex="" center-center="" horizontal="" layout="" class="">  <a href="#two">Song Tags</a></paper-tab>
+                    <paper-tab role="tab" inline="" flex="" center-center="" horizontal="" layout="" class=""> <a href="#three">My Lists</a></paper-tab>
+
+                  </paper-tabs>
+
+                </div>
+
+           </core-toolbar>  
+            
+            <div layout horizontal center-center >
+                <core-animated-pages selected="{{route}}" valueattr="hash"
+                         transitions="slide-from-right">
+                  <template repeat="{{page, i in pages}}">
+                    <section hash="{{page.hash}}" layout vertical center-center>
+                      <div>{{page.name}}</div>
+                    </section>
+                  </template>
+                </core-animated-pages>
+          </div>  
+            
+    </template>           
 	</body>
+    
+    <script>
+        var template = document.querySelector('#t');
+        template.pages = [
+          {name: 'Single', hash: 'one'},
+          {name: 'page', hash: 'two'},
+          {name: 'app', hash: 'three'},
+          {name: 'using', hash: 'four'},
+          {name: 'Polymer', hash: 'five'},
+        ];
+        template.menuItemSelected = function(e, detail, sender) {
+          if (detail.isSelected) {
+            this.$ && this.$.scaffold.closeDrawer();
+          }
+        };
+    </script>
 </html>

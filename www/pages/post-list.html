@@ -1,35 +1,22 @@
-<link rel="import" href="../components/polymer/polymer.html">
-<link rel="import" href="../post-service/post-service.html">
-<link rel="import" href="post-card.html">
-
-<polymer-element name="post-list" attributes="show">
-  <template>
-    <style>
-    :host {
-      display: block;
-      width: 100%;
-    }
-    post-card {
-      margin-bottom: 30px;
-    }
-    </style>
-
-    <post-service id="service" posts="{{posts}}">
-    </post-service>
-    
-    <div layout vertical center>
-
-      <template repeat="{{post in posts}}">
-        <post-card>
-          <img src="{{post.avatar}}" width="70" height="70">
-          <h2>{{post.username}}</h2>
-          <p>{{post.text}}</p>
-        </post-card>
-      </template>
-      
-    </div>
-  </template>
-  <script>
-  Polymer({});
-  </script>
-</polymer-element>
+<core-selector selected="1">
+  <paper-item noink>
+    <core-icon icon="label-outline"></core-icon>
+    <a href="#one">Single</a>
+  </paper-item>
+  <paper-item noink>
+    <core-icon icon="label-outline"></core-icon>
+    <a href="#two">page</a>
+  </paper-item>
+  <paper-item noink>
+    <core-icon icon="label-outline"></core-icon>
+    <a href="#three">app</a>
+  </paper-item>
+  <paper-item noink>
+    <core-icon icon="label-outline"></core-icon>
+    <a href="#four">using</a>
+  </paper-item>
+  <paper-item noink>
+    <core-icon icon="label-outline"></core-icon>
+    <a href="#five">Polymer</a>
+  </paper-item>
+</core-selector>      
